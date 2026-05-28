@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aybek Cafe Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<style>
+
+html {
+    scroll-behavior: smooth;
+}
+
+.nav {
+    display: flex;
+
+    justify-content: center;   /* 🔥 центр на ПК */
+    gap: 10px;
+
+    padding: 12px 10px;
+    margin-top: 10px;
+
+    flex-wrap: nowrap;
+
+    overflow-x: auto;          /* 🔥 для телефона свайп */
+    white-space: nowrap;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+/* скрыть скроллбар */
+.nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav a {
+    flex: 0 0 auto;
+
+    text-decoration: none;
+    color: #f5c27c;
+
+    padding: 8px 14px;
+    border: 1px solid #f5c27c;
+    border-radius: 20px;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    background: #f5c27c;
+    color: black;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 25px;
+    animation: fadeDown 1s ease;
+}
+
+.header h1 {
+    font-size: 34px;
+    margin: 0;
+    color: #f5c27c;
+}
+
+.header p {
+    color: #f5c27c;
+}
+
+/* MENU */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+    padding: 15px;
+
+    align-items: start;
+    grid-auto-flow: row; /* 🔥 важно */
+}
+/* CARD */
+.card {
+    background: rgba(34, 34, 34, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+
+    text-align: center;
+    transition: 0.3s;
+
+    height: 320px;   /* 🔥 фикс высоты = всё ровно */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* IMAGE */
+.card img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f5c27c;
+}
+
+/* TEXT */
+.card h3 {
+    font-size: 23px;
+    font-weight: 800;
+
+    background: linear-gradient(90deg, #fff, #f5c27c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    letter-spacing: 1px;
+}
+
+/* PRICE */
+.price {
+    background: #f5c27c;
+    color: black;
+
+    padding: 8px 14px;
+    border-radius: 20px;
+
+    display: inline-block;
+    font-weight: bold;
+
+    font-size: 18px;   /* 🔥 размер текста */
+}
+
+/* TITLES */
+h2 {
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin: 25px 0 10px;
+
+    justify-self: center;  /* 🔥 фиксит съезд */
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #111;
+}
+
+.footer a {
+    display: block;
+    margin: 10px;
+    font-size: 28px;
+    text-decoration: none;
+    color: #f5c27c;
+}
+
+.footer a i {
+    margin-right: 8px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #1c1c1c;
+    padding: 25px;
+    border-radius: 20px;
+    width: 300px;
+
+    text-align: center;
+    color: white;
+
+    animation: fadeUp 0.3s ease;
+}
+
+.close {
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+    color: #f5c27c;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+
+    /* КРАСИВЫЙ ФОН КАРТИНКОЙ + ЗАТЕМНЕНИЕ */
+    background:
+        linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+        url("https://avatars.mds.yandex.net/i?id=1a56b15119c1a1762b83f96cb3b05578286fb877-13071435-images-thumbs&n=13");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from {opacity:0; transform: translateY(20px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity:0; transform: translateY(-20px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+/* MOBILE */
+@media (max-width: 500px) {
+    .header h1 {
+        font-size: 26px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+    <a href="#main">🍲 Основные блюда</a>
+    <a href="#second">🍖 Вторые блюда</a>
+    <a href="#company">🍗 Блюда на компанию</a>
+    <a href="#fastfood">СТАРТ ФАСТФУД</a>
+    <a href="#breakfast">🍳 Завтрак</a>
+    <a href="#drinks">🥤 Напитки</a>
+</div>
+    
+<div class="header">
+    <h1>Айбек Ашканасы</h1>
+    <h2>Меню</h2>
+</div>
+
+<div class="menu">
+<!-- ОСНОВНЫЕ -->
+<h2 id="main">🍲 Основные блюда</h2>
+
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=a9b35698d30644553062cfd6063d9049f685a435-4928705-images-thumbs&n=13"><h3>Борщ</h3><div class="price">180 сом</div></div>
+<div class="card"><img src="https://img.povar.ru/mobile/b2/62/ec/80/pelmeni_iz_baranini-883367.jpg"><h3>Пельмени</h3><div class="price">220 сом</div></div>
+<div class="card"><img src="https://www.koolinar.ru/all_image/article/5/5131/article-7e6b6b95-a88c-4484-bf53-bfc8ba7d7e8f_large.jpg"><h3>Долма</h3><div class="price">250 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=28730da16b11f050d8fe8082247f941e0a3ea5ec-8340947-images-thumbs&n=13"><h3>Голубцы</h3><div class="price">180 / 250 сом</div></div>
+
+<!-- ВТОРЫЕ -->
+<h2 id="second">🍖 Вторые блюда</h2>
+
+<div class="card"><img src="https://i.ytimg.com/vi/4W3u4WIaNpA/maxresdefault.jpg"><h3>Бифштекс</h3><div class="price">220 сом</div></div>
+<div class="card"><img src="https://i.ytimg.com/vi/L1QMn4g8qDU/maxresdefault.jpg"><h3>Гуляш</h3><div class="price">220 сом</div></div>
+<div class="card"><img src="https://i.ytimg.com/vi/tfv_Z6Tb934/maxresdefault.jpg"><h3>Манты</h3><div class="price">200 сом/1 шт 40 сом</div></div>
+<div class="card"><img src="https://i.ytimg.com/vi/oor729or64U/maxresdefault.jpg"><h3>Самса с картошкой</h3><div class="price">30 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=8ba9071e35d01c2c960903fcaaff7c6318de093c-4378511-images-thumbs&n=13"><h3>Аш</h3><div class="price">220 / 250 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=79face12e5d30d4fe7be1a1d76083ba87c3f38b2-4916254-images-thumbs&n=13"><h3>Табака с рисом</h3><div class="price">250 / 270 сом</div></div>
+
+<!-- КОМПАНИЯ -->
+<h2 id="company">🍗 Блюда на компанию</h2>
+
+<div class="card"><img src="https://api.nuzhnaeda.ru/storage/abc19fdb3a17522210ab6170b54af8f2_origin.jpg"><h3>Балык минтай</h3><div class="price">700 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=8ba9071e35d01c2c960903fcaaff7c6318de093c-4378511-images-thumbs&n=13"><h3>Аш (1 кг)</h3><div class="price">1700 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=edb525a81f3204059d6bc7132ebc7e5e_l-4302779-images-thumbs&n=13"><h3>Куурдак</h3><div class="price">1700 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=0b2bb79c8b41737a0b8bfa9e3f43f1f92fcc5878-10299352-images-thumbs&n=13"><h3>Казан кебаб</h3><div class="price">1800 сом</div></div>
+
+<h2 id="fastfood">СТАРТ ФАСТФУД</h2>
+<!-- СТАРТ ФАСТФУД -->
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=a2c10a21a440fe72115c462aea42a17878fda52c-5234982-images-thumbs&n=13"><h3>Крылышки (1 кг)</h3><div class="price">700 сом</div></div>
+<div class="card"><img src="https://www.savoryexperiments.com/wp-content/uploads/2024/02/Cajun-Fries-19.jpg"><h3>Картошка фри</h3><div class="price">130 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=d3bf9b0845aabe629e0736dbcae653b9916fe74d-6208942-images-thumbs&n=13"><h3>Картофель по-деревенски</h3><div class="price">140 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=7806272c0f232c29f42df1069f49ac2a93859f3a-5311593-images-thumbs&n=13"><h3>Наггетсы 6 шт</h3><div class="price">160 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=3fc49ab1015e73e6509634bc76c399d489152003-5333575-images-thumbs&n=13"><h3>Соусы</h3><div class="price">40 сом</div></div>
+
+<h2 id="breakfast">🍳 На завтрак</h2>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=4ef34baacf7d55d29cd46f8412a6f5cf2af89494-4809921-images-thumbs&n=13"><h3>Блины со сметаной</h3><div class="price">25 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=8da31b7312ca5f52cb254c667e1e70786f9c48f3-10814230-images-thumbs&n=13"><h3>Блины с мясом</h3><div class="price">50 сом</div></div>
+
+<h2 id="drinks">🥤 Напитки</h2>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=0c2d87d408acff1ca9bf263f876ca049_l-17395741-images-thumbs&n=13"><h3>Coca‑Cola</h3><div class="price"></div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=a50cc90823075d323a57d110788e627a_l-10766029-images-thumbs&n=13"><h3>Pepsi</h3><div class="price"></div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=6e203144f4f12439257f3ed6158af830_l-5284089-images-thumbs&n=13"><h3>Asu</h3><div class="price"></div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=c11d0e4af672b526fc51f83ee5084403a0272d6f-5482493-images-thumbs&n=13"><h3>Сок с персиком</h3><div class="price"></div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=5b3b78496b97cb83f2ded41908a7b763_l-5364055-images-thumbs&n=13"><h3>Сок яблочный</h3><div class="price"></div></div>
+<div class="card"><img src="https://samogonvmeste.ru/images/recepts/vishnevaya-nastojka.jpg"><h3>Компот вишнёвый</h3><div class="price">1 литр 100 сом</div></div>
+<div class="card"><img src="https://i.pinimg.com/originals/07/c4/19/07c4198b695719946cc2289e50d4eb13.jpg"><h3>Компот абрикосовый</h3><div class="price">1 литр 100 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=78cc5adffdfec8e975d9bff5a91e6ddf875afdc0-10135049-images-thumbs&n=13"><h3>Чалап</h3><div class="price">1 литр 100 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=0857e47291262fc32b6e5a1de343c008_l-9266795-images-thumbs&n=13"><h3>Капучино</h3><div class="price">40 сом</div></div>
+<div class="card"><img src="https://avatars.mds.yandex.net/i?id=e193062ecfac026b4fcd7511b55e366968ac524d-5270099-images-thumbs&n=13"><h3>Американо</h3><div class="price">40 сом</div></div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+    <a href="https://wa.me/996555435444" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </a>
+
+    <a href="https://www.instagram.com/kafe_aybek?igsh=MTF0a2ZzeHNlZG52Zw==" target="_blank">
+        <i class="fa-brands fa-instagram"></i> Instagram
+    </a>
+
+</div>
+
+</body>
+</html>
